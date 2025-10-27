@@ -1,4 +1,4 @@
-# generate_maze
+# simple_maze
 
 Tiny Python package to generate grid mazes, solve them with A* and render
 ASCII and PNG visualizations. The project includes utilities to pick valid
