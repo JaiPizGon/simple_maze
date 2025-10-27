@@ -1,5 +1,5 @@
 [project]
-name = "simple_maze"
+name = "squared_maze"
 version = "0.1.0"
 description = "Maze generator and A* solver with ASCII and image rendering"
 readme = "README.md"

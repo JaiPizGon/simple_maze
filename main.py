@@ -1,4 +1,4 @@
-from src.simple_maze import generate_maze, astar, grid_to_ascii, save_images
+from src.squared_maze import generate_maze, astar, grid_to_ascii, save_images
 
 
 def main(rows: int = 12, cols: int = 20, seed: int | None = None) -> None:

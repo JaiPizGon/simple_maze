@@ -1,4 +1,4 @@
-# simple_maze
+# squared_maze
 
 Tiny Python package to generate grid mazes, solve them with A* and render
 ASCII and PNG visualizations. The project includes utilities to pick valid
@@ -8,7 +8,7 @@ solutions by breaking walls.
 Features
 - Generate perfect mazes (recursive backtracker) as a grid where `1` is
 	walkable and `0` is a wall.
-- Solve with A* (`src/maze/solver.py`).
+- Solve with A* (`src/squared_maze/solver.py`).
 - Render ASCII (`grid_to_ascii`) with customizable symbols.
 - Render PNG images (Pillow) with start (green), end (red), path (blue),
 	walls (dark gray) and floors (light gray).
@@ -37,13 +37,13 @@ If running the notebook from the repository you may need to add the project
 script or open a Python REPL like this:
 
 ```bash
-python3 -c "import sys; from pathlib import Path; sys.path.insert(0, str(Path('src').resolve())); from simple_maze import generate_maze, astar, grid_to_ascii; g=generate_maze(12,20,seed=42); print(grid_to_ascii(g, None))"
+python3 -c "import sys; from pathlib import Path; sys.path.insert(0, str(Path('src').resolve())); from squared_maze import generate_maze, astar, grid_to_ascii; g=generate_maze(12,20,seed=42); print(grid_to_ascii(g, None))"
 ```
 
 Basic usage (script)
 
 ```python
-from simple_maze import (
+from squared_maze import (
 		generate_maze,
 		astar,
 		grid_to_ascii,
