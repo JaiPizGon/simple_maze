@@ -23,6 +23,11 @@ dependency into your environment:
 pip install pillow
 ```
 
+Then install the package
+```bash
+pip install squared_maze
+```
+
 Running the example notebook
 
 Open the example notebook `examples/maze_example.ipynb` with Jupyter or run it

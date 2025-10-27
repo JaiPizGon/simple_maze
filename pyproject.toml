@@ -1,6 +1,6 @@
 [project]
 name = "squared_maze"
-version = "0.1.0"
+version = "0.1.1"
 description = "Maze generator and A* solver with ASCII and image rendering"
 readme = "README.md"
 requires-python = ">=3.8"
