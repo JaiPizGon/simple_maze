@@ -23,6 +23,8 @@ def grid_to_ascii(
     wall_sym: str = "█",
     path_sym: str = "*",
     walkable_sym: str = ".",
+    include_header: bool = False,
+    include_index: bool = False,
 ) -> str:
     """Return an ASCII representation of the maze using customizable symbols.
 
@@ -51,6 +53,11 @@ def grid_to_ascii(
 
     path_set = set(path) if path else set()
     lines: List[str] = []
+
+    rows = len(grid)
+    cols = len(grid[0]) if rows > 0 else 0
+
+    # build each row with a trailing semicolon
     for r, row in enumerate(grid):
         line_chars: List[str] = []
         for c, cell in enumerate(row):
@@ -65,7 +72,24 @@ def grid_to_ascii(
                 line_chars.append(wall_sym)
             else:
                 line_chars.append(walkable_sym)
-        lines.append("".join(line_chars))
+
+        row_str = "".join(line_chars) + ";"
+        if include_index:
+            row_str = f"row{r}: {row_str}"
+        lines.append(row_str)
+
+    # optional header with grid size and legend
+    header_lines: List[str] = []
+    if include_header:
+        header_lines.append(f"grid {cols}x{rows};")
+        legend = (
+            f"tile {wall_sym} = wall; tile {walkable_sym} = free; "
+            f"start {start_sym}; goal {end_sym};"
+        )
+        header_lines.append(legend)
+
+    if header_lines:
+        return "\n".join(header_lines + lines)
     return "\n".join(lines)
 
 
@@ -143,6 +167,51 @@ def save_images(grid: List[List[int]], path: Optional[List[Coord]] = None,
     img_no.save(fn_no)
     img_yes.save(fn_yes)
     return fn_no, fn_yes
+
+
+def grid_to_json(
+    grid: List[List[int]],
+    start: Optional[Coord] = None,
+    end: Optional[Coord] = None,
+) -> dict:
+    """Return a JSON-serializable dict describing the grid.
+
+    The returned structure follows the shape requested by the user:
+
+    {
+      "dims": [width, height],         # [cols, rows]
+      "start": [x, y] or None,        # [col, row]
+      "goal": [x, y] or None,
+      "obstacles": [[x,y], ...]       # list of wall coordinates as [col, row]
+    }
+
+    Note: internally the package represents coordinates as (row, col). This
+    function converts them to (col, row) pairs in the JSON output so the
+    first element corresponds to the x/column axis.
+    """
+
+    rows = len(grid)
+    cols = len(grid[0]) if rows > 0 else 0
+
+    obstacles: List[Tuple[int, int]] = []
+    for r, row in enumerate(grid):
+        for c, cell in enumerate(row):
+            if cell == 0:
+                # store as [col, row]
+                obstacles.append([c, r])
+
+    def to_xy(coord: Optional[Coord]) -> Optional[list]:
+        if coord is None:
+            return None
+        r, c = coord
+        return [c, r]
+
+    return {
+        "dims": [cols, rows],
+        "start": to_xy(start),
+        "goal": to_xy(end),
+        "obstacles": obstacles,
+    }
 
 
 if __name__ == "__main__":

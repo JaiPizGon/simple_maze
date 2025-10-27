@@ -4,7 +4,7 @@ Expose main helpers: generate_maze, solve_maze, render helpers.
 """
 from .generator import generate_maze, find_valid_cell, make_multiple_solutions, make_unsolvable
 from .solver import astar
-from .render import grid_to_ascii, save_images
+from .render import grid_to_ascii, save_images, grid_to_json
 
 __all__ = [
 	"generate_maze",
@@ -14,4 +14,5 @@ __all__ = [
 	"astar",
 	"grid_to_ascii",
 	"save_images",
+	"grid_to_json",
 ]
