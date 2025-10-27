@@ -1,0 +1,17 @@
+[project]
+name = "simple_maze"
+version = "0.1.0"
+description = "Maze generator and A* solver with ASCII and image rendering"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [ { name = "Jaime Pizarroso", email = "jpizarroso@comillas.edu" } ]
+keywords = ["maze", "astar", "generator", "puzzle", "visualization"]
+classifiers = [
+	"Programming Language :: Python :: 3",
+	"License :: OSI Approved :: MIT License",
+	"Operating System :: OS Independent",
+]
+dependencies = [
+	"Pillow>=9.0.0"
+]
